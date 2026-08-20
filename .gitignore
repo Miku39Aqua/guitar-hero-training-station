@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# 环境变量与密钥
+.env
+.env.*
+
+# 数据与模型缓存
+data/episodes.db
+*.pt
+*.ckpt
+demucs_models/
+
+# 音频与谱面大文件
+*.mp3
+*.wav
+*.flac
+
+# 前端
+node_modules/
+dist/
+
+# IDE / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 赛题文档(不上传)
+大工黑客松S2-赛题发布.pdf
