@@ -1,0 +1,16 @@
+{
+  "title": "California Dreamin'",
+  "artist": "The Mamas & The Papas",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.2,
+    "流行": 0.7,
+    "爵士": 0.3,
+    "民谣": 0.8
+  },
+  "era": "1960s",
+  "techniques": ["分解和弦", "扫弦"],
+  "bpm": 108,
+  "key": "A minor",
+  "difficulty": 2
+}

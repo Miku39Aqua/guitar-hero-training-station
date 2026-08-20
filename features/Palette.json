@@ -1,0 +1,16 @@
+{
+  "title": "Palette",
+  "artist": "美波",
+  "style_vector": {
+    "ACG": 0.7,
+    "摇滚": 0.4,
+    "流行": 0.6,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 118,
+  "key": "F major",
+  "difficulty": 3
+}

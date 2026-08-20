@@ -1,0 +1,16 @@
+{
+  "title": "Light My Fire",
+  "artist": "The Doors",
+  "style_vector": {
+    "ACG": 0.05,
+    "摇滚": 0.85,
+    "流行": 0.3,
+    "爵士": 0.4,
+    "民谣": 0.2
+  },
+  "era": "1960s",
+  "techniques": ["分解和弦", "扫弦", "滑音", "点弦"],
+  "bpm": 125,
+  "key": "A minor",
+  "difficulty": 4
+}

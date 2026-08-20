@@ -1,0 +1,16 @@
+{
+  "title": "KICK BACK",
+  "artist": "米津玄姫",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.6,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2020s",
+  "techniques": ["快速分解", "扫弦", "强力和弦"],
+  "bpm": 140,
+  "key": "D minor",
+  "difficulty": 4
+}

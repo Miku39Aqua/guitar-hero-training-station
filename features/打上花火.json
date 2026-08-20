@@ -1,0 +1,16 @@
+{
+  "title": "打上花火",
+  "artist": "DAOKO × 米津玄姫",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.3,
+    "流行": 0.5,
+    "爵士": 0.15,
+    "民谣": 0.4
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "泛音", "滑音"],
+  "bpm": 100,
+  "key": "Bb major",
+  "difficulty": 3
+}

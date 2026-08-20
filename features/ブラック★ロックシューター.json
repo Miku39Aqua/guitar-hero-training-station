@@ -1,0 +1,16 @@
+{
+  "title": "ブラック★ロックシューター",
+  "artist": "supercell",
+  "style_vector": {
+    "ACG": 0.95,
+    "摇滚": 0.6,
+    "流行": 0.3,
+    "爵士": 0.1,
+    "民谣": 0.1
+  },
+  "era": "2010s",
+  "techniques": ["快速分解", "扫弦", "强力和弦"],
+  "bpm": 165,
+  "key": "F minor",
+  "difficulty": 5
+}

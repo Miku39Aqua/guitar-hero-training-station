@@ -1,0 +1,16 @@
+{
+  "title": "God Knows...",
+  "artist": "平野綾",
+  "style_vector": {
+    "ACG": 0.95,
+    "摇滚": 0.6,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.05
+  },
+  "era": "2000s",
+  "techniques": ["横按", "快速分解", "扫弦"],
+  "bpm": 168,
+  "key": "A minor",
+  "difficulty": 4
+}

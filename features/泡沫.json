@@ -1,0 +1,16 @@
+{
+  "title": "泡沫",
+  "artist": "GLAY",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.7,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2000s",
+  "techniques": ["强力和弦", "扫弦", "分解和弦"],
+  "bpm": 120,
+  "key": "A major",
+  "difficulty": 4
+}

@@ -1,0 +1,16 @@
+{
+  "title": "シルエット",
+  "artist": "KANA-BOON",
+  "style_vector": {
+    "ACG": 0.8,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["快速分解", "强力和弦", "扫弦"],
+  "bpm": 140,
+  "key": "B minor",
+  "difficulty": 4
+}

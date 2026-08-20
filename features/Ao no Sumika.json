@@ -1,0 +1,16 @@
+{
+  "title": "Ao no Sumika",
+  "artist": "tujiko",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.3,
+    "流行": 0.5,
+    "爵士": 0.3,
+    "民谣": 0.5
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 88,
+  "key": "D minor",
+  "difficulty": 2
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Marry You",
+  "artist": "Bruno Mars",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.1,
+    "流行": 0.8,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2010s",
+  "techniques": ["强力和弦", "扫弦", "分解和弦"],
+  "bpm": 145,
+  "key": "F major",
+  "difficulty": 2
+}

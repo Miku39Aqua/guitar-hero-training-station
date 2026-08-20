@@ -1,0 +1,6 @@
+pyguitarpro
+sqlite-vec
+fastapi
+uvicorn
+openai
+numpy

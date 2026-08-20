@@ -1,0 +1,16 @@
+{
+  "title": "Overfly",
+  "artist": "HanaHana",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.15,
+    "民谣": 0.3
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "横按", "扫弦"],
+  "bpm": 132,
+  "key": "C# minor",
+  "difficulty": 4
+}

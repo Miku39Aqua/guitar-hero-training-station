@@ -1,0 +1,256 @@
+/* 基础重置 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f3f4f6;
+    color: #1f2937;
+    overflow: hidden;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 320px 1fr 320px;
+    height: 100vh;
+    gap: 1px;
+    background: #e5e7eb;
+}
+
+.panel {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9fafb;
+}
+.panel-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    letter-spacing: 1px;
+}
+
+/* 左侧：对话区 */
+.panel-chat {
+    border-right: 1px solid #e5e7eb;
+}
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.chat-message {
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 13px;
+    line-height: 1.55;
+    animation: fadeIn 0.25s ease;
+    color: #1f2937;
+}
+.chat-message.user {
+    align-self: flex-end;
+    background: #dbeafe;
+    border-color: #bfdbfe;
+}
+.chat-message.agent {
+    align-self: flex-start;
+    background: #f3f4f6;
+    border-color: #e5e7eb;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.chat-input-wrap {
+    padding: 12px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 8px;
+}
+.chat-input-wrap input {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #1f2937;
+    outline: none;
+    font-size: 13px;
+}
+.chat-input-wrap input:focus { border-color: #6366f1; }
+.chat-input-wrap button {
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0 16px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.chat-input-wrap button:hover { background: #4f52d6; }
+.btn-surprise {
+    background: #f59e0b !important;
+    color: white !important;
+}
+.btn-surprise:hover { background: #d97706 !important; }
+.btn-tone {
+    background: #10b981 !important;
+    color: white !important;
+}
+.btn-tone:hover { background: #059669 !important; }
+
+/* 中间：谱面区 */
+.panel-score {
+    background: #ffffff;
+}
+.score-controls { display: flex; gap: 8px; }
+.btn-play, .btn-stop {
+    background: #f3f4f6;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.btn-play:hover { background: #e5e7eb; }
+.btn-stop:hover { background: #fee2e2; }
+.score-container {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.placeholder-text {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 60px;
+}
+
+/* 右侧：记忆面板 */
+.panel-memory {
+    border-left: 1px solid #e5e7eb;
+}
+.memory-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+.memory-section h3 {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.memory-box {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #374151;
+}
+.memory-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px dashed #e5e7eb;
+}
+.memory-row:last-child { border-bottom: none; }
+.memory-key { color: #6b7280; }
+.memory-value { color: #111827; font-weight: 600; }
+
+.rule-item {
+    padding: 8px 10px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+    color: #1f2937;
+}
+.rule-item .rule-text { flex: 1; }
+.rule-item .rule-hits { color: #ea580c; font-weight: 700; margin-left: 8px; }
+.rule-item.highlight {
+    background: #dbeafe;
+    border-color: #6366f1;
+    animation: highlightPulse 1.2s ease;
+}
+@keyframes highlightPulse {
+    0% { background: #dbeafe; }
+    50% { background: #bfdbfe; }
+    100% { background: #f9fafb; }
+}
+
+/* alphaTab 自适应 */
+#score-container .at-surface {
+    background: #ffffff !important;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+/* 历史记录 */
+.history-section {
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+    max-height: 220px;
+    overflow-y: auto;
+}
+.history-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+.history-list {
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #1f2937;
+}
+.history-item:hover {
+    border-color: #6366f1;
+    background: #eef2ff;
+}
+.history-item .history-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.history-item .history-meta {
+    color: #6b7280;
+    white-space: nowrap;
+}

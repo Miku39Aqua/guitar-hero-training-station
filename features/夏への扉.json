@@ -1,0 +1,16 @@
+{
+  "title": "夏への扉",
+  "artist": "SEVENTEEN",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.3,
+    "流行": 0.8,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2020s",
+  "techniques": ["强力和弦", "扫弦", "分解和弦"],
+  "bpm": 115,
+  "key": "F major",
+  "difficulty": 3
+}

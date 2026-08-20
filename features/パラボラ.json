@@ -1,0 +1,16 @@
+{
+  "title": "パラボラ",
+  "artist": "Official髭男dism",
+  "style_vector": {
+    "ACG": 0.5,
+    "摇滚": 0.4,
+    "流行": 0.7,
+    "爵士": 0.3,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 108,
+  "key": "G major",
+  "difficulty": 3
+}

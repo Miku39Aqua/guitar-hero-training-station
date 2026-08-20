@@ -1,0 +1,16 @@
+{
+  "title": "Nothing Else Matters",
+  "artist": "Metallica",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.9,
+    "流行": 0.2,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "1990s",
+  "techniques": ["分解和弦", "滑音", "泛音"],
+  "bpm": 80,
+  "key": "E minor",
+  "difficulty": 4
+}

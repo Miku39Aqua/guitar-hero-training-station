@@ -1,0 +1,16 @@
+{
+  "title": "Scarlet",
+  "artist": "ポルノグラフィティ",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.7,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2010s",
+  "techniques": ["强力和弦", "扫弦", "分解和弦"],
+  "bpm": 130,
+  "key": "C# minor",
+  "difficulty": 4
+}

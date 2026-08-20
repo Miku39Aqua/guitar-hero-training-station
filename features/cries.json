@@ -1,0 +1,16 @@
+{
+  "title": "cries",
+  "artist": "xi",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.6,
+    "流行": 0.3,
+    "爵士": 0.15,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["点弦", "扫弦", "推弦"],
+  "bpm": 160,
+  "key": "A minor",
+  "difficulty": 5
+}

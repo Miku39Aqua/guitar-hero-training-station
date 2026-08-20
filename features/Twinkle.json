@@ -1,0 +1,16 @@
+{
+  "title": "Twinkle",
+  "artist": "BERRY GOODMAN",
+  "style_vector": {
+    "ACG": 0.5,
+    "摇滚": 0.3,
+    "流行": 0.6,
+    "爵士": 0.2,
+    "民谣": 0.5
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 100,
+  "key": "F# minor",
+  "difficulty": 3
+}

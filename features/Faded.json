@@ -1,0 +1,16 @@
+{
+  "title": "Faded",
+  "artist": "Alan Walker",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.2,
+    "流行": 0.6,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "扫弦"],
+  "bpm": 90,
+  "key": "D minor",
+  "difficulty": 2
+}

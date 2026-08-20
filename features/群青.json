@@ -1,0 +1,16 @@
+{
+  "title": "群青",
+  "artist": "YOASOBI",
+  "style_vector": {
+    "ACG": 0.75,
+    "摇滚": 0.4,
+    "流行": 0.6,
+    "爵士": 0.25,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "横按", "扫弦"],
+  "bpm": 115,
+  "key": "G major",
+  "difficulty": 3
+}

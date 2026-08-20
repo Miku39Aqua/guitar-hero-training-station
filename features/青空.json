@@ -1,0 +1,16 @@
+{
+  "title": "青空",
+  "artist": "RADWIMPS",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.5
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 105,
+  "key": "C major",
+  "difficulty": 3
+}

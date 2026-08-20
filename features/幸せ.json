@@ -1,0 +1,16 @@
+{
+  "title": "幸せ",
+  "artist": "bank band",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.2,
+    "流行": 0.5,
+    "爵士": 0.3,
+    "民谣": 0.7
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 80,
+  "key": "C major",
+  "difficulty": 2
+}

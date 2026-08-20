@@ -1,0 +1,16 @@
+{
+  "title": "Lies",
+  "artist": "SSAM",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "强力和弦", "扫弦"],
+  "bpm": 110,
+  "key": "G minor",
+  "difficulty": 4
+}

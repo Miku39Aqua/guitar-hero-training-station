@@ -1,0 +1,16 @@
+{
+  "title": "Cadence of Her",
+  "artist": "EUROBEAT",
+  "style_vector": {
+    "ACG": 0.4,
+    "摇滚": 0.6,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.1
+  },
+  "era": "1990s",
+  "techniques": ["快速分解", "扫弦", "点弦"],
+  "bpm": 155,
+  "key": "F minor",
+  "difficulty": 5
+}

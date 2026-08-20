@@ -1,0 +1,16 @@
+{
+  "title": "航海の彼方",
+  "artist": "LEO SIRENE",
+  "style_vector": {
+    "ACG": 0.7,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.25,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "横按", "扫弦"],
+  "bpm": 110,
+  "key": "G minor",
+  "difficulty": 3
+}

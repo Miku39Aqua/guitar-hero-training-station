@@ -1,0 +1,16 @@
+{
+  "title": "東京",
+  "artist": "King Gnu",
+  "style_vector": {
+    "ACG": 0.5,
+    "摇滚": 0.6,
+    "流行": 0.5,
+    "爵士": 0.3,
+    "民谣": 0.3
+  },
+  "era": "2020s",
+  "techniques": ["快速分解", "强力和弦", "扫弦"],
+  "bpm": 138,
+  "key": "F# minor",
+  "difficulty": 5
+}

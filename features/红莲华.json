@@ -1,0 +1,16 @@
+{
+  "title": "红莲华",
+  "artist": "LiSA",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.8,
+    "流行": 0.3,
+    "爵士": 0.05,
+    "民谣": 0.1
+  },
+  "era": "2010s",
+  "techniques": ["扫弦", "强力和弦", "推弦"],
+  "bpm": 135,
+  "key": "E minor",
+  "difficulty": 3
+}

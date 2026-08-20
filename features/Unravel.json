@@ -1,0 +1,16 @@
+{
+  "title": "Unravel",
+  "artist": "TK from 凛として時雨",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.7,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["扫弦", "强力和弦", "点弦", "推弦"],
+  "bpm": 145,
+  "key": "E minor",
+  "difficulty": 5
+}

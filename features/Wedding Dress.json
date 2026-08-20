@@ -1,0 +1,16 @@
+{
+  "title": "Wedding Dress",
+  "artist": "Taeyang",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.2,
+    "流行": 0.8,
+    "爵士": 0.3,
+    "民谣": 0.4
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "滑音", "切音"],
+  "bpm": 90,
+  "key": "C major",
+  "difficulty": 3
+}

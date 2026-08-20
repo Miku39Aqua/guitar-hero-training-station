@@ -1,0 +1,16 @@
+{
+  "title": "Fly Me to the Moon",
+  "artist": "Frank Sinatra",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.05,
+    "流行": 0.6,
+    "爵士": 0.85,
+    "民谣": 0.3
+  },
+  "era": "1960s",
+  "techniques": ["分解和弦", "滑音"],
+  "bpm": 120,
+  "key": "C major",
+  "difficulty": 2
+}

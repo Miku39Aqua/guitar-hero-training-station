@@ -1,0 +1,16 @@
+{
+  "title": "Losing My Religion",
+  "artist": "R.E.M.",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.3,
+    "民谣": 0.6
+  },
+  "era": "1990s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 118,
+  "key": "G major",
+  "difficulty": 3
+}

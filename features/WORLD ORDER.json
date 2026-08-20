@@ -1,0 +1,16 @@
+{
+  "title": "WORLD ORDER",
+  "artist": "WORLD ORDER",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.4,
+    "流行": 0.6,
+    "爵士": 0.3,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["快速分解", "扫弦", "点弦"],
+  "bpm": 125,
+  "key": "Eb major",
+  "difficulty": 4
+}

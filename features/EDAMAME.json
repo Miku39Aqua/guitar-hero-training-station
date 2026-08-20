@@ -1,0 +1,16 @@
+{
+  "title": "EDAMAME",
+  "artist": "Aimer",
+  "style_vector": {
+    "ACG": 0.8,
+    "摇滚": 0.3,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.5
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "横按", "滑音"],
+  "bpm": 102,
+  "key": "Eb major",
+  "difficulty": 3
+}

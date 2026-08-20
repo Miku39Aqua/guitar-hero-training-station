@@ -1,0 +1,16 @@
+{
+  "title": "Lost",
+  "artist": "Frank Ocean",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.1,
+    "流行": 0.6,
+    "爵士": 0.4,
+    "民谣": 0.5
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "滑音", "闷音"],
+  "bpm": 95,
+  "key": "G major",
+  "difficulty": 2
+}

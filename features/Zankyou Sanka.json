@@ -1,0 +1,16 @@
+{
+  "title": "Zankyou Sanka",
+  "artist": "Aimer",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2020s",
+  "techniques": ["强力和弦", "扫弦", "快速分解"],
+  "bpm": 145,
+  "key": "E minor",
+  "difficulty": 5
+}

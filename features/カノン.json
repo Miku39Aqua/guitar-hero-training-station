@@ -1,0 +1,16 @@
+{
+  "title": "カノン",
+  "artist": "Pachelbel",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.1,
+    "流行": 0.4,
+    "爵士": 0.3,
+    "民谣": 0.8
+  },
+  "era": "1600s",
+  "techniques": ["分解和弦", "滑音"],
+  "bpm": 55,
+  "key": "C major",
+  "difficulty": 4
+}

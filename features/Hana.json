@@ -1,0 +1,16 @@
+{
+  "title": "Hana",
+  "artist": "MONDO GROSSO",
+  "style_vector": {
+    "ACG": 0.5,
+    "摇滚": 0.2,
+    "流行": 0.6,
+    "爵士": 0.4,
+    "民谣": 0.5
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "滑音", "泛音"],
+  "bpm": 92,
+  "key": "Eb major",
+  "difficulty": 3
+}

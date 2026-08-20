@@ -1,0 +1,16 @@
+{
+  "title": "Autumn Leaves",
+  "artist": "Joseph Kosma",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.1,
+    "流行": 0.4,
+    "爵士": 0.9,
+    "民谣": 0.5
+  },
+  "era": "1940s",
+  "techniques": ["分解和弦", "滑音", "泛音"],
+  "bpm": 120,
+  "key": "G minor",
+  "difficulty": 3
+}

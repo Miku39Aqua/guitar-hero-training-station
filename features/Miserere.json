@@ -1,0 +1,16 @@
+{
+  "title": "Miserere",
+  "artist": "Gregorio Allegri",
+  "style_vector": {
+    "ACG": 0.05,
+    "摇滚": 0.05,
+    "流行": 0.2,
+    "爵士": 0.3,
+    "民谣": 0.4
+  },
+  "era": "1600s",
+  "techniques": ["分解和弦", "滑音"],
+  "bpm": 60,
+  "key": "G minor",
+  "difficulty": 3
+}

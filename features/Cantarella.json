@@ -1,0 +1,17 @@
+{
+  "title": "Cantarella",
+  "artist": "Kagrra",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.3,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.5,
+    "和风": 0.8
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "泛音", "滑音"],
+  "bpm": 100,
+  "key": "D minor",
+  "difficulty": 3
+}

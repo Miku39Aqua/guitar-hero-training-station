@@ -1,0 +1,16 @@
+{
+  "title": "夜に泳ぐ",
+  "artist": "Zutomayo",
+  "style_vector": {
+    "ACG": 0.7,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.3,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 115,
+  "key": "G minor",
+  "difficulty": 3
+}

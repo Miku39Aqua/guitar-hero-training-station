@@ -1,0 +1,16 @@
+{
+  "title": "Stairway to Heaven",
+  "artist": "Led Zeppelin",
+  "style_vector": {
+    "ACG": 0.05,
+    "摇滚": 0.9,
+    "流行": 0.2,
+    "爵士": 0.3,
+    "民谣": 0.6
+  },
+  "era": "1970s",
+  "techniques": ["分解和弦", "扫弦", "滑音", "泛音"],
+  "bpm": 82,
+  "key": "A minor",
+  "difficulty": 5
+}

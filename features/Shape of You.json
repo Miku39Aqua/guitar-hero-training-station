@@ -1,0 +1,16 @@
+{
+  "title": "Shape of You",
+  "artist": "Ed Sheeran",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.1,
+    "流行": 0.9,
+    "爵士": 0.1,
+    "民谣": 0.4
+  },
+  "era": "2010s",
+  "techniques": ["强力和弦", "扫弦", "切音"],
+  "bpm": 96,
+  "key": "C# minor",
+  "difficulty": 2
+}

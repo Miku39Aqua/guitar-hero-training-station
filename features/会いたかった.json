@@ -1,0 +1,16 @@
+{
+  "title": "会いたかった",
+  "artist": "RADWIMPS",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.4,
+    "流行": 0.6,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 100,
+  "key": "C major",
+  "difficulty": 3
+}

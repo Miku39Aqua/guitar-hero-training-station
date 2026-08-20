@@ -1,0 +1,16 @@
+{
+  "title": "前前前世",
+  "artist": "RADWIMPS",
+  "style_vector": {
+    "ACG": 0.8,
+    "摇滚": 0.5,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "扫弦", "切音"],
+  "bpm": 118,
+  "key": "G major",
+  "difficulty": 3
+}

@@ -1,0 +1,16 @@
+{
+  "title": "夜明けと蛍",
+  "artist": "Natori",
+  "style_vector": {
+    "ACG": 0.75,
+    "摇滚": 0.3,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.5
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 98,
+  "key": "Bb major",
+  "difficulty": 3
+}

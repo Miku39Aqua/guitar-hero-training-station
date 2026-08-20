@@ -1,0 +1,16 @@
+{
+  "title": "Endless sorrow",
+  "artist": "B'z",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.8,
+    "流行": 0.3,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2000s",
+  "techniques": ["强力和弦", "扫弦", "推弦"],
+  "bpm": 110,
+  "key": "D minor",
+  "difficulty": 4
+}

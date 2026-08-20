@@ -1,0 +1,16 @@
+{
+  "title": "Starlight",
+  "artist": "Mili",
+  "style_vector": {
+    "ACG": 0.8,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2010s",
+  "techniques": ["快速分解", "扫弦", "横按"],
+  "bpm": 155,
+  "key": "D minor",
+  "difficulty": 5
+}

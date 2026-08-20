@@ -1,0 +1,16 @@
+{
+  "title": "Canon Rock",
+  "artist": "JerryC",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.9,
+    "流行": 0.3,
+    "爵士": 0.3,
+    "民谣": 0.2
+  },
+  "era": "2000s",
+  "techniques": ["快速分解", "强力和弦", "扫弦", "点弦"],
+  "bpm": 140,
+  "key": "D major",
+  "difficulty": 5
+}

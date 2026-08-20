@@ -1,0 +1,16 @@
+{
+  "title": "青と夏",
+  "artist": "Mrs. GREEN APPLE",
+  "style_vector": {
+    "ACG": 0.5,
+    "摇滚": 0.5,
+    "流行": 0.7,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["扫弦", "强力和弦", "分解和弦"],
+  "bpm": 145,
+  "key": "D major",
+  "difficulty": 4
+}

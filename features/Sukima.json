@@ -1,0 +1,16 @@
+{
+  "title": "Sukima",
+  "artist": "Zutomayo",
+  "style_vector": {
+    "ACG": 0.7,
+    "摇滚": 0.5,
+    "流行": 0.5,
+    "爵士": 0.25,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 125,
+  "key": "C# minor",
+  "difficulty": 4
+}

@@ -1,0 +1,16 @@
+{
+  "title": "MONSTER",
+  "artist": "ONE OK ROCK",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.9,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["强力和弦", "扫弦", "点弦"],
+  "bpm": 155,
+  "key": "C# minor",
+  "difficulty": 5
+}

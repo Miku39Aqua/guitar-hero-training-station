@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉他英雄训练站 | Guitar Hero Training Station</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- 左侧：对话区 -->
+        <aside class="panel panel-chat">
+            <div class="panel-header">
+                <span class="panel-title">对话区</span>
+            </div>
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input-wrap">
+                <input id="chat-input" type="text" placeholder="说你想弹什么曲子..." autocomplete="off" />
+                <button id="chat-send">发送</button>
+                <input id="audio-upload" type="file" accept="audio/*" style="display:none" />
+                <button id="audio-btn">上传音频</button>
+                <button id="surprise-btn" class="btn-surprise">🎲 给我来点没听过的</button>
+                <button id="tone-btn" class="btn-tone">🎸 推荐音色</button>
+            </div>
+        </aside>
+
+        <!-- 中间：谱面区（视觉重心） -->
+        <main class="panel panel-score">
+            <div class="panel-header">
+                <span class="panel-title">谱面区</span>
+                <div class="score-controls">
+                    <button id="play-btn" class="btn-play">▶ 播放</button>
+                    <button id="stop-btn" class="btn-stop">■ 停止</button>
+                </div>
+            </div>
+            <div id="score-container" class="score-container">
+                <div class="placeholder-text">发送消息后，谱面将在此渲染</div>
+            </div>
+            <div id="alphaTab-api" style="display:none;"></div>
+            <div class="history-section">
+                <div class="history-header">
+                    <span class="panel-title">历史记录</span>
+                </div>
+                <div id="history-list" class="history-list"></div>
+            </div>
+        </main>
+
+        <!-- 右侧：记忆面板 -->
+        <aside class="panel panel-memory">
+            <div class="panel-header">
+                <span class="panel-title">记忆面板</span>
+            </div>
+            <div class="memory-section">
+                <h3>画像</h3>
+                <div id="memory-profile" class="memory-box"></div>
+            </div>
+            <div class="memory-section">
+                <h3>规则</h3>
+                <div id="memory-rules" class="memory-box"></div>
+            </div>
+            <div class="memory-section">
+                <h3>成本统计</h3>
+                <div id="memory-stats" class="memory-box"></div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

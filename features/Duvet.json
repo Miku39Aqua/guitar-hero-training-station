@@ -1,0 +1,16 @@
+{
+  "title": "Duvet",
+  "artist": "Boa",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.4,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 102,
+  "key": "B minor",
+  "difficulty": 3
+}

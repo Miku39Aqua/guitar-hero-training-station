@@ -1,0 +1,16 @@
+{
+  "title": "Bloom",
+  "artist": "TWICE",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.1,
+    "流行": 0.95,
+    "爵士": 0.05,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["强力和弦", "扫弦", "分解和弦"],
+  "bpm": 105,
+  "key": "F# major",
+  "difficulty": 2
+}

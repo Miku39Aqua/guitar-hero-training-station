@@ -1,0 +1,16 @@
+{
+  "title": "Idol",
+  "artist": "YOASOBI",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.5,
+    "流行": 0.6,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2020s",
+  "techniques": ["快速分解", "扫弦", "强力和弦"],
+  "bpm": 160,
+  "key": "F# major",
+  "difficulty": 5
+}

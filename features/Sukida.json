@@ -1,0 +1,16 @@
+{
+  "title": "Sukida",
+  "artist": "SIX LOUNGE",
+  "style_vector": {
+    "ACG": 0.5,
+    "摇滚": 0.7,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.3
+  },
+  "era": "2020s",
+  "techniques": ["强力和弦", "扫弦", "快速分解"],
+  "bpm": 135,
+  "key": "E major",
+  "difficulty": 4
+}

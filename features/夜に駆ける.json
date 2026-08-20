@@ -1,0 +1,16 @@
+{
+  "title": "夜に駆ける",
+  "artist": "YOASOBI",
+  "style_vector": {
+    "ACG": 0.8,
+    "摇滚": 0.4,
+    "流行": 0.7,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "扫弦", "滑音"],
+  "bpm": 130,
+  "key": "B minor",
+  "difficulty": 3
+}

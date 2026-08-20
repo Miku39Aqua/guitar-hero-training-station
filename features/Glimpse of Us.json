@@ -1,0 +1,16 @@
+{
+  "title": "Glimpse of Us",
+  "artist": "Joji",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.1,
+    "流行": 0.7,
+    "爵士": 0.3,
+    "民谣": 0.6
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "闷音"],
+  "bpm": 78,
+  "key": "Db major",
+  "difficulty": 2
+}

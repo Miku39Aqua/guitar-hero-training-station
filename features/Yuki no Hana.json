@@ -1,0 +1,16 @@
+{
+  "title": "Yuki no Hana",
+  "artist": "中島美嘉",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.1,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.7
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "滑音", "泛音"],
+  "bpm": 70,
+  "key": "Db major",
+  "difficulty": 2
+}

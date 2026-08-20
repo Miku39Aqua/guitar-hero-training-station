@@ -1,0 +1,16 @@
+{
+  "title": "Pierrot",
+  "artist": "LEO SIRENE",
+  "style_vector": {
+    "ACG": 0.7,
+    "摇滚": 0.6,
+    "流行": 0.4,
+    "爵士": 0.2,
+    "民谣": 0.3
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "强力和弦", "滑音"],
+  "bpm": 120,
+  "key": "C# minor",
+  "difficulty": 4
+}

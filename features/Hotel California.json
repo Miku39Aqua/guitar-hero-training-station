@@ -1,0 +1,16 @@
+{
+  "title": "Hotel California",
+  "artist": "Eagles",
+  "style_vector": {
+    "ACG": 0.05,
+    "摇滚": 0.8,
+    "流行": 0.4,
+    "爵士": 0.4,
+    "民谣": 0.3
+  },
+  "era": "1970s",
+  "techniques": ["分解和弦", "扫弦", "滑音", "点弦"],
+  "bpm": 75,
+  "key": "B minor",
+  "difficulty": 4
+}

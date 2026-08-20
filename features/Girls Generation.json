@@ -1,0 +1,16 @@
+{
+  "title": "Girls' Generation",
+  "artist": "少女時代",
+  "style_vector": {
+    "ACG": 0.2,
+    "摇滚": 0.3,
+    "流行": 0.95,
+    "爵士": 0.1,
+    "民谣": 0.1
+  },
+  "era": "2000s",
+  "techniques": ["强力和弦", "扫弦", "分解和弦"],
+  "bpm": 122,
+  "key": "A minor",
+  "difficulty": 3
+}

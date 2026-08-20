@@ -1,0 +1,16 @@
+{
+  "title": "Thousand Miles",
+  "artist": "Vanessa Carlton",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.1,
+    "流行": 0.6,
+    "爵士": 0.3,
+    "民谣": 0.5
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "快速分解"],
+  "bpm": 95,
+  "key": "F# minor",
+  "difficulty": 4
+}

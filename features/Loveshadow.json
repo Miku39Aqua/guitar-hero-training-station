@@ -1,0 +1,16 @@
+{
+  "title": "Loveshadow",
+  "artist": "U Mi",
+  "style_vector": {
+    "ACG": 0.8,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.2,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "横按", "滑音"],
+  "bpm": 105,
+  "key": "Bb minor",
+  "difficulty": 3
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Smoke on the Water",
+  "artist": "Deep Purple",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.95,
+    "流行": 0.2,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "1970s",
+  "techniques": ["强力和弦", "扫弦", "推弦"],
+  "bpm": 112,
+  "key": "G minor",
+  "difficulty": 3
+}

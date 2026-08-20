@@ -1,0 +1,16 @@
+{
+  "title": "星野",
+  "artist": "YOASOBI",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.1,
+    "民谣": 0.3
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "扫弦", "横按"],
+  "bpm": 125,
+  "key": "D major",
+  "difficulty": 3
+}

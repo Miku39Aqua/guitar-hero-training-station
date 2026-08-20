@@ -1,0 +1,16 @@
+{
+  "title": "only my railgun",
+  "artist": "fripSide",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.7,
+    "流行": 0.5,
+    "爵士": 0.05,
+    "民谣": 0.05
+  },
+  "era": "2010s",
+  "techniques": ["快速分解", "点弦", "扫弦"],
+  "bpm": 143,
+  "key": "B minor",
+  "difficulty": 4
+}

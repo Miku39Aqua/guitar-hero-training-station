@@ -1,0 +1,16 @@
+{
+  "title": "薬局",
+  "artist": "Zutomayo",
+  "style_vector": {
+    "ACG": 0.6,
+    "摇滚": 0.4,
+    "流行": 0.5,
+    "爵士": 0.3,
+    "民谣": 0.4
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "扫弦"],
+  "bpm": 110,
+  "key": "E minor",
+  "difficulty": 3
+}

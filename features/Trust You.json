@@ -1,0 +1,16 @@
+{
+  "title": "Trust You",
+  "artist": "GUNDAM 00",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.2
+  },
+  "era": "2000s",
+  "techniques": ["分解和弦", "强力和弦", "扫弦"],
+  "bpm": 132,
+  "key": "F# minor",
+  "difficulty": 4
+}

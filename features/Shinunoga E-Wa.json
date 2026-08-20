@@ -1,0 +1,16 @@
+{
+  "title": "Shinunoga E-Wa",
+  "artist": "Fujii Kaze",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.2,
+    "流行": 0.6,
+    "爵士": 0.3,
+    "民谣": 0.5
+  },
+  "era": "2020s",
+  "techniques": ["分解和弦", "滑音", "切音"],
+  "bpm": 85,
+  "key": "Ab major",
+  "difficulty": 2
+}

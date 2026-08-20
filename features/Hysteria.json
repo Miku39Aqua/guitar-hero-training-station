@@ -1,0 +1,16 @@
+{
+  "title": "Hysteria",
+  "artist": "Muse",
+  "style_vector": {
+    "ACG": 0.1,
+    "摇滚": 0.95,
+    "流行": 0.3,
+    "爵士": 0.1,
+    "民谣": 0.1
+  },
+  "era": "2000s",
+  "techniques": ["快速分解", "强力和弦", "扫弦", "推弦"],
+  "bpm": 146,
+  "key": "E minor",
+  "difficulty": 5
+}

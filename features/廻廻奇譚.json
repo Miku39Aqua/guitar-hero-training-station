@@ -1,0 +1,16 @@
+{
+  "title": "廻廻奇譚",
+  "artist": "Eve",
+  "style_vector": {
+    "ACG": 0.9,
+    "摇滚": 0.5,
+    "流行": 0.4,
+    "爵士": 0.1,
+    "民谣": 0.3
+  },
+  "era": "2020s",
+  "techniques": ["快速分解", "扫弦", "横按"],
+  "bpm": 152,
+  "key": "E minor",
+  "difficulty": 5
+}

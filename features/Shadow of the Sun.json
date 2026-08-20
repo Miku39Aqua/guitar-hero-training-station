@@ -1,0 +1,16 @@
+{
+  "title": "Shadow of the Sun",
+  "artist": "Tom Rosenthal",
+  "style_vector": {
+    "ACG": 0.3,
+    "摇滚": 0.1,
+    "流行": 0.5,
+    "爵士": 0.3,
+    "民谣": 0.7
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "滑音", "闷音"],
+  "bpm": 75,
+  "key": "C major",
+  "difficulty": 2
+}

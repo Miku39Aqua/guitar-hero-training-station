@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>alphaTex 测试</title>
+    <script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #score { width: 100%; }
+        textarea { width: 100%; height: 150px; margin-top: 20px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>alphaTex 渲染测试</h1>
+    <div id="score"></div>
+    <h3>alphaTex 源码：</h3>
+    <textarea readonly>\title "alphaTex 测试曲"
+\artist "测试"
+\tempo 120
+\ts 4 4
+.
+0.3.4 2.3.4 0.2.4 1.2.4 |
+(0.6 2.5 2.4 0.3).4 (0.5 2.4 2.3 0.2).4 0.1.2 |
+2.3.8 4.3.8 r.4 0.4.2 |</textarea>
+    <script>
+        const alphatex = document.querySelector('textarea').value;
+        const el = document.getElementById('score');
+        const api = new alphaTab.AlphaTabApi(el, {
+            core: { tex: true },
+            display: {
+                layoutMode: alphaTab.LayoutMode.Page,
+                staveProfile: alphaTab.StaveProfile.ScoreTab,
+            },
+        });
+        api.tex(alphatex);
+    </script>
+</body>
+</html>

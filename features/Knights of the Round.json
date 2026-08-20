@@ -1,0 +1,16 @@
+{
+  "title": "Knights of the Round",
+  "artist": "Mili",
+  "style_vector": {
+    "ACG": 0.85,
+    "摇滚": 0.6,
+    "流行": 0.4,
+    "爵士": 0.15,
+    "民谣": 0.2
+  },
+  "era": "2010s",
+  "techniques": ["快速分解", "强力和弦", "扫弦"],
+  "bpm": 150,
+  "key": "G minor",
+  "difficulty": 5
+}

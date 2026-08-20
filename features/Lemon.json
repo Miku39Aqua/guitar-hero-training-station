@@ -1,0 +1,16 @@
+{
+  "title": "Lemon",
+  "artist": "米津玄姫",
+  "style_vector": {
+    "ACG": 0.4,
+    "摇滚": 0.2,
+    "流行": 0.7,
+    "爵士": 0.3,
+    "民谣": 0.6
+  },
+  "era": "2010s",
+  "techniques": ["分解和弦", "滑音", "闷音"],
+  "bpm": 75,
+  "key": "C major",
+  "difficulty": 2
+}
