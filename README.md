@@ -58,9 +58,4 @@ server.py           # FastAPI 服务端
 - PyGuitarPro + alphaTab（谱面渲染）
 - DeepSeek LLM（对话生成）
 
-## 大工黑客松 S2
 
-本项目为「吉他英雄训练站」，报名赛道：
-- 奇绩创坛「为现实打个补丁」
-- 开放原子「制造一点意外」
-- 七牛云「反馈记忆 Agent」
