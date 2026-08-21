@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分轨纯享 | 吉他英雄训练站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="stems-body">
+    <header class="app-header">
+        <div class="app-brand">吉他英雄训练站</div>
+        <div class="app-actions">
+            <a href="index.html" class="btn-history">返回首页</a>
+        </div>
+    </header>
+
+    <div class="stems-page">
+        <div class="stems-card">
+            <h2 class="stems-title">分轨纯享</h2>
+            <p class="form-hint">选择想提取的乐器轨道，系统将同时返回所选轨道及其“排除版”（如吉他 + 无吉他）。</p>
+
+            <div class="stem-upload" id="stem-upload-wrap">
+                <label class="stem-upload-label">
+                    <input type="file" id="stem-file" accept="audio/*" />
+                    <span>点击上传音频文件</span>
+                </label>
+                <div class="stem-file-name" id="stem-file-name"></div>
+            </div>
+
+            <div class="stem-actions">
+                <button type="button" id="stem-select-all" class="btn-outline">全选</button>
+                <button type="button" id="stem-clear-all" class="btn-outline">取消全选</button>
+            </div>
+
+            <div class="stem-grid" id="stem-grid">
+                <label class="stem-card"><input type="checkbox" value="vocals" /><span>人声 Vocals</span></label>
+                <label class="stem-card"><input type="checkbox" value="drums" /><span>鼓 Drums</span></label>
+                <label class="stem-card"><input type="checkbox" value="bass" /><span>贝斯 Bass</span></label>
+                <label class="stem-card"><input type="checkbox" value="guitar" checked /><span>吉他 Guitar</span></label>
+                <label class="stem-card"><input type="checkbox" value="piano" /><span>钢琴 Piano</span></label>
+                <label class="stem-card"><input type="checkbox" value="other" /><span>其他 Other</span></label>
+            </div>
+
+            <div id="stem-progress-wrap" class="stem-progress-wrap" style="display:none;">
+                <div class="progress-bar">
+                    <div id="stem-progress-fill" class="progress-fill"></div>
+                </div>
+                <div class="stem-progress-meta">
+                    <span id="stem-progress-text">准备中...</span>
+                    <span id="stem-eta">预计剩余时间：计算中...</span>
+                </div>
+            </div>
+
+            <div class="stem-result" id="stem-result" style="display:none;">
+                <p id="stem-result-text"></p>
+                <a id="stem-download-btn" class="btn-download" href="#">下载分轨压缩包</a>
+            </div>
+
+            <div class="form-error" id="stem-error"></div>
+            <button type="button" id="stem-submit" class="btn-submit">开始分离</button>
+        </div>
+    </div>
+
+    <script src="stems.js"></script>
+</body>
+</html>

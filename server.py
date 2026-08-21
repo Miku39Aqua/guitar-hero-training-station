@@ -23,7 +23,11 @@ if env_path.exists():
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from fastapi import FastAPI, File, UploadFile
+PROJECT_ROOT = Path(__file__).resolve().parent
+
+from typing import List
+
+from fastapi import FastAPI, File, UploadFile, Depends, Request, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -32,11 +36,20 @@ from pydantic import BaseModel
 from tab_engine.ir import ScoreIR, MeasureIR, BeatIR, NoteIR
 from tab_engine.adapt import adapt_difficulty
 from tab_engine.to_alphatex import score_to_alphatex_compact
+from tab_engine.to_gp5 import ir_to_gp5
 
 import agent.memory as memory
 from features.surprise import surprise_me
 
+from auth import db as auth_db
+from auth.router import router as auth_router
+from auth.security import get_current_user_id, require_user, security_scheme, decode_token
+from services.package_service import package_stems
+from services.range_response import ranged_file_response
+from audio.demucs_runner import separate_stems, ALL_HT_DEMACS_STEMS, cleanup_stale_cache
+
 app = FastAPI(title="吉他英雄训练站")
+app.include_router(auth_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -46,44 +59,63 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# 初始化认证数据库
+auth_db.init_auth_tables()
+
+
+@app.on_event("startup")
+def _cleanup_demucs_cache_on_startup():
+    """启动时清理超过 7 天未访问的 Demucs 分离缓存，避免磁盘占用无限增长。"""
+    try:
+        removed = cleanup_stale_cache(PROJECT_ROOT / "uploads" / "demucs_output", max_age_days=7)
+        if removed:
+            print(f"[cache] 已清理 {len(removed)} 个过期 Demucs 缓存目录")
+    except Exception as e:
+        print(f"[cache] 缓存清理失败: {e}")
+
 # ========== 后台任务存储 ==========
 
 class Task:
     def __init__(self):
-        self.status = "pending"  # pending / running / done / failed
-        self.progress = ""       # 进度描述
-        self.result = None       # ChatResponse
+        self.status = "pending"
+        self.progress = ""
+        self.result = None
         self.error = None
-        self.created_at = time.time()
+        self.user_id = None
+        self.filename = None
+        self.selected_stems = None
+        self.started_at = time.time()
 
 _task_store: dict[str, Task] = {}
 
 
-# ========== 历史记录存储 ==========
+def get_task(task_id: str) -> Task | None:
+    return _task_store.get(task_id)
+
+
+# ========== 历史记录（内存） ==========
 
 class HistoryItem:
-    def __init__(self, title: str, artist: str, alphatex: str, reply: str, source: str = ""):
+    def __init__(self, title: str, artist: str, source: str, alphatex: str, reply: str):
         self.id = uuid.uuid4().hex
         self.title = title
         self.artist = artist
+        self.source = source
         self.alphatex = alphatex
         self.reply = reply
-        self.source = source
         self.created_at = time.time()
 
 _history_store: list[HistoryItem] = []
-_HISTORY_MAX = 50
 
 
-def add_history(title: str, artist: str, alphatex: str, reply: str, source: str = "") -> HistoryItem:
-    item = HistoryItem(title=title, artist=artist, alphatex=alphatex, reply=reply, source=source)
-    _history_store.insert(0, item)
-    if len(_history_store) > _HISTORY_MAX:
-        _history_store = _history_store[:_HISTORY_MAX]
+def add_history(title: str, artist: str, source: str, alphatex: str, reply: str) -> HistoryItem:
+    item = HistoryItem(title=title, artist=artist, source=source, alphatex=alphatex, reply=reply)
+    _history_store.append(item)
     return item
 
 
 def get_history() -> list[dict]:
+    items = sorted(_history_store, key=lambda x: x.created_at, reverse=True)[:50]
     return [
         {
             "id": item.id,
@@ -280,20 +312,13 @@ def build_demo_song(song_name: str) -> ScoreIR:
             break
 
     if matched:
-        ir = demos[matched]
-    else:
-        ir = ScoreIR(title=song_name, artist="", bpm=120)
+        return demos[matched]
 
-    if not ir.measures:
-        for _ in range(4):
-            m = MeasureIR(beats=[
-                BeatIR(duration=4, notes=[NoteIR(string=3, fret=0)]),
-                BeatIR(duration=4, notes=[NoteIR(string=3, fret=2)]),
-                BeatIR(duration=4, notes=[NoteIR(string=2, fret=0)]),
-                BeatIR(duration=4, notes=[NoteIR(string=2, fret=1)]),
-            ])
-            ir.measures.append(m)
-
+    # 通用 fallback
+    ir = ScoreIR(title=song_name, artist="", bpm=120)
+    for _ in range(8):
+        m = MeasureIR(beats=[BeatIR(duration=4, notes=[]) for _ in range(4)])
+        ir.measures.append(m)
     return ir
 
 
@@ -343,35 +368,92 @@ def generate_score_from_llm(llm_data: dict) -> ScoreIR | None:
 
 # ========== 后台任务执行 ==========
 
-def run_chat_task(task_id: str, message: str, audio_filename: str | None = None):
+def _update_task_history(
+    task_id: str,
+    user_id: int | None,
+    status: str,
+    progress: str,
+    zip_path: str | None = None,
+):
+    """如果任务关联了登录用户，同步更新数据库中的历史记录。"""
+    if user_id is not None:
+        try:
+            auth_db.update_history_status(
+                task_id, status=status, progress=progress, zip_path=zip_path
+            )
+        except Exception as e:
+            print(f"[history] 更新历史记录失败: {e}")
+
+
+def run_chat_task(
+    task_id: str,
+    message: str,
+    audio_filename: str | None = None,
+    audio_mode: str = "song",
+    user_id: int | None = None,
+):
     task = get_task(task_id)
     if not task:
         return
 
+    def set_progress(msg: str):
+        task.progress = msg
+        _update_task_history(task_id, user_id, "running", msg)
+
     try:
         task.status = "running"
+        task.user_id = user_id
+        task.filename = audio_filename
+
+        # 如果有登录用户，记录到个人历史
+        if audio_filename and user_id is not None:
+            auth_db.create_history_record(
+                task_id=task_id,
+                filename=audio_filename,
+                source="audio",
+                extraction_type=[audio_mode],
+                user_id=user_id,
+                status="running",
+                progress="正在处理音频...",
+            )
 
         # 1. 如果有音频文件，走音频管线
+        parsed_audio_filename = None
         if audio_filename:
-            task.progress = "正在处理音频（音频管线尚未接入模型，当前为演示模式）..."
-            audio_path = Path("uploads") / audio_filename
+            set_progress("正在处理音频...")
+            audio_path = PROJECT_ROOT / "uploads" / audio_filename
             if audio_path.exists():
                 from audio import transcribe_audio
-                ir = transcribe_audio(str(audio_path), progress_callback=lambda s: setattr(task, "progress", s))
+                ir = transcribe_audio(str(audio_path), mode=audio_mode, progress_callback=set_progress)
                 source = "audio"
+
+                # 尝试找到 Demucs 分离出的吉他音轨，供前端播放
+                if audio_mode == "song":
+                    demucs_dir = PROJECT_ROOT / "uploads" / "demucs_output" / "htdemucs_6s"
+                    stem = Path(audio_filename).stem
+                    candidate = demucs_dir / stem / "guitar.wav"
+                    if not candidate.exists():
+                        candidate = demucs_dir / stem / "other.wav"
+                    if candidate.exists():
+                        import shutil
+                        parsed_name = f"{stem}_guitar.wav"
+                        shutil.copy(candidate, PROJECT_ROOT / "uploads" / parsed_name)
+                        parsed_audio_filename = parsed_name
+                    else:
+                        print(f"[server] 未找到 Demucs 吉他音轨: {candidate}")
             else:
                 ir = build_demo_song(message or audio_filename)
                 source = "builtin"
         else:
             # 纯文字对话
-            task.progress = "正在检索记忆..."
+            set_progress("正在检索记忆...")
 
             memory_context = memory.retrieve(message)
 
-            task.progress = "记忆检索完成，正在生成谱面（AI 生成中，可能需要 1-2 分钟）..."
+            set_progress("记忆检索完成，正在生成谱面（AI 生成中，可能需要 1-2 分钟）...")
 
             def on_progress(msg):
-                task.progress = msg
+                set_progress(msg)
 
             llm_result = call_llm_for_song(message, memory_context, on_progress=on_progress)
 
@@ -382,47 +464,47 @@ def run_chat_task(task_id: str, message: str, audio_filename: str | None = None)
                 ir = build_demo_song(message)
                 source = "builtin"
 
-        task.progress = "谱面生成完成，正在应用改编规则..."
+        set_progress("谱面生成完成，正在应用改编规则...")
 
         # 2. 改编
         profile = memory._load_profile()
         adapted_ir, report = adapt_difficulty(ir, profile)
 
         # 3. 转 alphaTex
-        task.progress = "正在渲染谱面..."
+        set_progress("正在渲染谱面...")
         alphatex = score_to_alphatex_compact(adapted_ir)
 
         # 4. 构建回复
-        source_tag = {
-            "llm": "AI 生成",
-            "builtin": "内置演示",
-            "audio": "音频转写",
-        }.get(source, "生成")
-        reply = f"已为你生成《{ir.title}》的吉他谱（{source_tag}）。"
-        if report.changes:
-            reply += f"\n\n{report.summary_text()}"
-        user_input = message or (audio_filename or "")
-        memory_context = memory.retrieve(user_input)
-        if memory_context:
-            reply += f"\n\n（已参考你的历史偏好）"
+        if source == "audio":
+            reply = f"已为你生成《{adapted_ir.title}》的吉他谱（来自音频）。"
+        elif source == "llm":
+            reply = f"已为你生成《{adapted_ir.title}》的吉他谱。"
+        else:
+            reply = f"已为你生成《{adapted_ir.title}》的演示谱面。"
 
         task.progress = "完成"
         task.status = "done"
-        task.result = {"reply": reply, "alphatex": alphatex}
+        task.result = {
+            "reply": reply,
+            "alphatex": alphatex,
+            "ir": adapted_ir,
+            "parsed_audio_filename": parsed_audio_filename,
+        }
+        _update_task_history(task_id, user_id, "done", "完成")
 
-        # 保存到历史记录
+        # 5. 记录历史
         add_history(
-            title=ir.title,
-            artist=ir.artist,
+            title=adapted_ir.title,
+            artist=adapted_ir.artist,
+            source=source,
             alphatex=alphatex,
             reply=reply,
-            source=source,
         )
 
-        # 5. 异步 distill
+        # 6. 异步 distill
         def do_distill():
             memory.distill(
-                user_input=user_input,
+                user_input=message,
                 agent_output=reply,
                 user_feedback="",
             )
@@ -432,6 +514,82 @@ def run_chat_task(task_id: str, message: str, audio_filename: str | None = None)
         task.status = "failed"
         task.error = str(e)
         task.progress = f"失败: {e}"
+        _update_task_history(task_id, user_id, "failed", task.progress)
+
+
+def run_separate_task(
+    task_id: str,
+    audio_filename: str,
+    selected_stems: list[str],
+    user_id: int | None = None,
+):
+    """多轨分离后台任务：Demucs 分离选中轨道、生成排除轨道、打包 zip。"""
+    task = get_task(task_id)
+    if not task:
+        return
+
+    def set_progress(msg: str):
+        task.progress = msg
+        _update_task_history(task_id, user_id, "running", msg)
+
+    try:
+        task.status = "running"
+        task.user_id = user_id
+        task.filename = audio_filename
+        task.selected_stems = selected_stems
+
+        if not selected_stems:
+            raise ValueError("请至少选择一个乐器轨道")
+
+        invalid = [s for s in selected_stems if s not in ALL_HT_DEMACS_STEMS]
+        if invalid:
+            raise ValueError(f"不支持的轨道类型: {invalid}")
+
+        if user_id is not None:
+            auth_db.create_history_record(
+                task_id=task_id,
+                filename=audio_filename,
+                source="stems",
+                extraction_type=selected_stems,
+                user_id=user_id,
+                status="running",
+                progress="正在初始化分轨任务...",
+            )
+
+        audio_path = PROJECT_ROOT / "uploads" / audio_filename
+        if not audio_path.exists():
+            raise FileNotFoundError(f"音频文件不存在: {audio_filename}")
+
+        set_progress("正在分离乐器轨道（首次处理可能需要下载模型）...")
+        output_dir = PROJECT_ROOT / "uploads" / "demucs_output"
+        stem_paths = separate_stems(
+            str(audio_path),
+            output_dir=str(output_dir),
+            selected_stems=selected_stems,
+        )
+
+        set_progress("正在打包下载文件...")
+        out_dir = PROJECT_ROOT / "exports" / "stems"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        zip_path = out_dir / f"{task_id}.zip"
+        original_name = Path(audio_filename).stem
+        zip_size = package_stems(zip_path, stem_paths, original_name)
+
+        set_progress("完成")
+        task.status = "done"
+        task.result = {
+            "zip_path": str(zip_path),
+            "zip_size": zip_size,
+            "filename": f"{original_name}_stems.zip",
+            "stems": list(stem_paths.keys()),
+        }
+        _update_task_history(task_id, user_id, "done", "完成", zip_path=str(zip_path))
+
+    except Exception as e:
+        task.status = "failed"
+        task.error = str(e)
+        task.progress = f"失败: {e}"
+        _update_task_history(task_id, user_id, "failed", task.progress)
 
 
 # ========== API 路由 ==========
@@ -439,11 +597,17 @@ def run_chat_task(task_id: str, message: str, audio_filename: str | None = None)
 class ChatRequest(BaseModel):
     message: str
     audio_filename: str | None = None  # 前端先上传到 /api/upload，拿到文件名再发 chat
+    audio_mode: str = "song"  # "song" | "guitar"
 
 
 class ChatResponse(BaseModel):
     reply: str
     alphatex: str
+
+
+class SeparateRequest(BaseModel):
+    audio_filename: str
+    selected_stems: List[str]
 
 
 class MemoryResponse(BaseModel):
@@ -459,7 +623,7 @@ async def root():
 
 
 @app.post("/api/chat")
-async def chat(req: ChatRequest):
+async def chat(req: ChatRequest, user_id: int | None = Depends(get_current_user_id)):
     message = req.message.strip()
     if not message and not req.audio_filename:
         return ChatResponse(reply="请告诉我你想弹什么曲子，或上传一段音频。", alphatex="")
@@ -471,6 +635,7 @@ async def chat(req: ChatRequest):
     threading.Thread(
         target=run_chat_task,
         args=(task_id, message, req.audio_filename),
+        kwargs={"audio_mode": req.audio_mode or "song", "user_id": user_id},
         daemon=True,
     ).start()
 
@@ -480,12 +645,74 @@ async def chat(req: ChatRequest):
 @app.post("/api/upload")
 async def upload_audio(file: UploadFile = File(...)):
     """上传音频文件，返回可访问的文件名。"""
-    upload_dir = Path("uploads")
+    upload_dir = PROJECT_ROOT / "uploads"
     upload_dir.mkdir(exist_ok=True)
     file_path = upload_dir / file.filename
     content = await file.read()
     file_path.write_bytes(content)
     return {"filename": file.filename}
+
+
+@app.post("/api/separate")
+async def separate_audio(req: SeparateRequest, user_id: int | None = Depends(get_current_user_id)):
+    """提交多轨分离任务。"""
+    if not req.audio_filename:
+        raise HTTPException(status_code=400, detail="请上传音频文件")
+    if not req.selected_stems:
+        raise HTTPException(status_code=400, detail="请至少选择一个乐器轨道")
+
+    invalid = [s for s in req.selected_stems if s not in ALL_HT_DEMACS_STEMS]
+    if invalid:
+        raise HTTPException(status_code=400, detail=f"不支持的轨道类型: {invalid}")
+
+    audio_path = PROJECT_ROOT / "uploads" / req.audio_filename
+    if not audio_path.exists():
+        raise HTTPException(status_code=404, detail="音频文件不存在")
+
+    task_id = uuid.uuid4().hex
+    task = Task()
+    _task_store[task_id] = task
+
+    threading.Thread(
+        target=run_separate_task,
+        args=(task_id, req.audio_filename, req.selected_stems),
+        kwargs={"user_id": user_id},
+        daemon=True,
+    ).start()
+
+    return {"task_id": task_id}
+
+
+@app.get("/api/audio/{filename}")
+async def get_audio_file(filename: str):
+    """提供上传的音频文件访问。"""
+    file_path = PROJECT_ROOT / "uploads" / filename
+    if not file_path.exists():
+        return {"error": "file not found"}, 404
+    return FileResponse(str(file_path))
+
+
+class FeedbackRequest(BaseModel):
+    user_input: str = ""
+    agent_output: str = ""
+    feedback: str = ""
+
+
+@app.post("/api/feedback")
+async def feedback(req: FeedbackRequest):
+    """接收用户反馈，异步蒸馏到记忆系统。"""
+    def _distill():
+        try:
+            memory.distill(
+                user_input=req.user_input,
+                agent_output=req.agent_output,
+                user_feedback=req.feedback,
+            )
+        except Exception as e:
+            print(f"feedback distill failed: {e}")
+
+    threading.Thread(target=_distill, daemon=True).start()
+    return {"ok": True}
 
 
 @app.get("/api/tasks/{task_id}")
@@ -499,11 +726,40 @@ async def get_task_status(task_id: str):
         "progress": task.progress,
     }
     if task.status == "done" and task.result:
-        resp["reply"] = task.result["reply"]
-        resp["alphatex"] = task.result["alphatex"]
+        if "reply" in task.result:
+            resp["reply"] = task.result["reply"]
+        if "alphatex" in task.result:
+            resp["alphatex"] = task.result["alphatex"]
+        if task.result.get("ir"):
+            resp["title"] = task.result["ir"].title
+        if task.result.get("parsed_audio_filename"):
+            resp["parsed_audio_filename"] = task.result["parsed_audio_filename"]
+        # 分轨任务结果
+        if task.result.get("zip_path"):
+            resp["zip_path"] = task.result["zip_path"]
+            resp["zip_size"] = task.result.get("zip_size")
+            resp["download_filename"] = task.result.get("filename")
+            resp["stems"] = task.result.get("stems")
     if task.status == "failed":
         resp["error"] = task.error
     return resp
+
+
+@app.get("/api/export-gp5/{task_id}")
+async def export_gp5(task_id: str):
+    task = get_task(task_id)
+    if not task or task.status != "done" or not task.result:
+        return {"error": "task not found or not completed"}, 404
+
+    ir = task.result.get("ir")
+    if not ir:
+        return {"error": "no score ir available"}, 400
+
+    out_dir = PROJECT_ROOT / "exports"
+    out_dir.mkdir(exist_ok=True)
+    out_path = out_dir / f"{task_id}.gp5"
+    ir_to_gp5(ir, str(out_path))
+    return FileResponse(str(out_path), filename=f"{ir.title or 'tab'}.gp5")
 
 
 @app.get("/api/memory", response_model=MemoryResponse)
@@ -517,26 +773,18 @@ async def get_memory():
     )
 
 
-class SurpriseResponse(BaseModel):
-    title: str
-    artist: str
-    surprise_score: float
-    reason: str
-    features: dict
-
-
-@app.get("/api/surprise-me", response_model=SurpriseResponse)
+@app.get("/api/surprise-me")
 async def surprise_me_api():
     item = surprise_me()
     if not item:
-        return SurpriseResponse(
-            title="无推荐",
-            artist="",
-            surprise_score=0.0,
-            reason="特征库为空",
-            features={},
-        )
-    return SurpriseResponse(**item)
+        return {
+            "title": "无推荐",
+            "artist": "",
+            "surprise_score": 0.0,
+            "reason": "特征库为空",
+            "features": {},
+        }
+    return item
 
 
 @app.get("/api/history")
@@ -550,6 +798,50 @@ async def get_history_item_api(item_id: str):
     if not item:
         return {"error": "not found"}, 404
     return item
+
+
+@app.get("/api/my-history")
+async def get_my_history(
+    page: int = 1,
+    page_size: int = 10,
+    user_id: int = Depends(require_user),
+):
+    """已登录用户的个人音频提取历史（分页）。"""
+    items, total = auth_db.get_history_by_user(user_id, page=page, page_size=page_size)
+    return {
+        "items": items,
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+    }
+
+
+@app.get("/api/download/{task_id}")
+async def download_stems(
+    request: Request,
+    task_id: str,
+    credentials = Depends(security_scheme),
+):
+    """支持断点续传的分轨打包下载。
+
+    认证方式：Bearer Header 或 URL 查询参数 ?token=...
+    """
+    token = request.query_params.get("token") or (
+        credentials.credentials if credentials else None
+    )
+    user_id = decode_token(token) if token else None
+
+    task = get_task(task_id)
+    if not task or task.status != "done" or not task.result or not task.result.get("zip_path"):
+        raise HTTPException(status_code=404, detail="task not found or not completed")
+
+    # 如果任务关联了用户，只能由本人下载
+    if task.user_id is not None and task.user_id != user_id:
+        raise HTTPException(status_code=403, detail="无权下载该文件")
+
+    zip_path = Path(task.result["zip_path"])
+    filename = task.result.get("filename", f"{task_id}.zip")
+    return ranged_file_response(request, zip_path, filename)
 
 
 class ToneRequest(BaseModel):

@@ -8,12 +8,16 @@ venv/
 # 环境变量与密钥
 .env
 .env.*
+!.env.example
 
 # 数据与模型缓存
 data/episodes.db
+data/auth_history.db
 *.pt
 *.ckpt
 demucs_models/
+exports/
+uploads/
 
 # 音频与谱面大文件
 *.mp3

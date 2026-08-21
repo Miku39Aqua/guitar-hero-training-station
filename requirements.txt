@@ -2,5 +2,15 @@ pyguitarpro
 sqlite-vec
 fastapi
 uvicorn
+python-multipart
+pydantic[email]
+passlib[bcrypt]
+python-jose[cryptography]
 openai
 numpy
+demucs
+torch
+torchaudio
+basic-pitch
+soundfile
+PyWavelets
